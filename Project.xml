@@ -32,6 +32,7 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="assets" />
+	<assets path="mods" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -52,7 +53,8 @@
 	<!--Remove the legacy health system-->
 	<haxedef name="FLX_NO_HEALTH" />
 
-	<haxedef name="POLYMOD_SCRIPT_EXT" value=".hscript"/>
+	<haxedef name="POLYMOD_SCRIPT_EXT" value=".hscript" />
+	<haxedef name="POLYMOD_DEBUG" value="true" />
 	
 	<!--Enable the Flixel core recording system-->
 	<!--<haxedef name="FLX_RECORD" />-->

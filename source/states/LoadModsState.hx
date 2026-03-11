@@ -10,8 +10,7 @@ class LoadModsState extends FlxState
     override public function create()
     {
         super.create();
-        Polymod.init({modRoot: "./mods/"});
-        Polymod.scan();
+        Polymod.init({modRoot: "./mods/", dirs:["mod"]});
         FlxG.switchState(MainMenuState.new);
     }
 }
