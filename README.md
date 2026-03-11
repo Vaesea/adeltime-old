@@ -7,12 +7,13 @@ This is inspired by Turrican II, Sonic 2's Scrapped Time Travel story and Super 
 ## Compilation Instructions
 1. Get Haxe 4.3.7
 2. Get HaxeFlixel (including Flixel-Addons)
-3. Get hxcpp (needed unless you're compiling for html5 i think)
-4. Get Polymod (including thx.core, thx.semver, jsonpath and jsonpatch)
-5. Use git versions of thx.core, thx.semver, jsonpath and jsonpatch (use haxelib git (library) and then the repository urls) (You may not need to do this for all, but it's better to do this to be safe, as in my case, without the git versions, the haxe extension in Visual Studio Code displayed errors that could also likely be compilation errors?)
-6. Question why
-7. Compile using "lime test (platform) -debug" (You can use -release or whatever, but I recommend against that right now)
-8. You should be done. If there's anything I missed please let me know. I have a feeling jsonpath and jsonpatch may not need to be git but I will test that later.
+3. Get hxcpp (needed for windows builds)
+4. Get Visual Studio Community (install the c++ stuff, like the windows 11 sdk and the msvc stuff) (i know, this installs around 7 GB of stuff, but it's needed i think)
+5. Get Polymod (including thx.core, thx.semver, jsonpath and jsonpatch)
+6. Use git versions of thx.core, thx.semver, jsonpath and jsonpatch (use haxelib git (library) and then the repository urls) (You may not need to do this for all, but it's better to do this to be safe, as in my case, without the git versions, the haxe extension in Visual Studio Code displayed errors that could also likely be compilation errors?)
+7. Question why
+8. Compile using "lime test (platform) -debug" (You can use -release or whatever, but I recommend against that right now)
+9. You should be done. If there's anything I missed please let me know. I have a feeling jsonpath and jsonpatch may not need to be git but I will test that later.
 
 ## Credits
 - Vaesea - Art, Code, Music, Test Level
