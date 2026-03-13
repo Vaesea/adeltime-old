@@ -1,5 +1,6 @@
 package;
 
+import characters.enemies.as.Rollball;
 import characters.enemies.as.Snowmangry;
 import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
@@ -86,6 +87,8 @@ class LevelLoader extends FlxState
             {
                 case "snowmangry":
                     state.enemies.add(new Snowmangry(object.x, object.y - 78));
+                case "rollball":
+                    state.enemies.add(new Rollball(object.x, object.y - 28));
             }
         }
 
