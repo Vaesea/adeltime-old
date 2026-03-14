@@ -10,7 +10,7 @@ This is inspired by Turrican II, Sonic 2's Scrapped Time Travel story and Super 
 3. Get hxcpp (needed for windows builds)
 4. Get Visual Studio Community (install the c++ stuff, like the windows 11 sdk and the msvc stuff) (i know, this installs around 7 GB of stuff, but it's needed i think)
 5. Get Polymod (including thx.core, thx.semver, jsonpath and jsonpatch)
-6. Use git version of thx.core (haxelib git https://github.com/fponticelli/thx.core)
+6. Use git version of thx.core (haxelib git thx.core https://github.com/fponticelli/thx.core)
 7. Compile using "lime test (platform) -debug" (You can use -release or whatever, but I recommend against that right now)
 8. You should be done. If there's anything I missed please let me know.
 
