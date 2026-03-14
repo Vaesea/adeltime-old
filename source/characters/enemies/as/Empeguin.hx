@@ -10,8 +10,8 @@ class Empeguin extends Enemy
     // WHY AM I USING CAPITAL LETTERS
     // WHAT THE FUCK :33333333
     var image = FlxAtlasFrames.fromSparrow("assets/images/characters/enemies/empeguin.png", "assets/images/characters/enemies/empeguin.xml");
-
     var busy = false;
+    var rollBallJump = 256;
 
     public function new(x:Float, y:Float)
     {
@@ -24,9 +24,9 @@ class Empeguin extends Enemy
         flipX = true;
 
         // Animations
-        animation.addByPrefix('stand', 'stand', 8, true);
-        animation.addByPrefix('throw', 'throw', 8, false);
-        animation.addByPrefix('squished', 'fall', 8, false);
+        animation.addByPrefix('stand', 'stand', 14, true);
+        animation.addByPrefix('throw', 'throw', 14, false);
+        animation.addByPrefix('squished', 'fall', 14, false);
         animation.play('stand');
 
         // Hitbox
@@ -48,6 +48,7 @@ class Empeguin extends Enemy
                     var rollBall:Rollball = new Rollball(this.x, this.y + 42);
                     rollBall.direction = this.direction;
                     rollBall.flipX = this.flipX;
+                    rollBall.velocity.y = -rollBallJump;
                     Global.PS.enemies.add(rollBall);
                     new FlxTimer().start(0.2, function(_)
                     {
