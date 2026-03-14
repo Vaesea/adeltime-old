@@ -48,6 +48,15 @@ class Adel extends FlxSprite
     public var invincible = false;
     var stars:FlxSprite;
 
+    // Dash move variables
+    public var dash = false;
+    public var dashSpeed = 800;
+    public var dashDistance = 200;
+    public var dashPosition:Float = 0;
+    public var dashTimer:Float = 0;
+    public var dashCooldown:Float = 1;
+    public var dashDirection = 1;
+
     // Spritesheet
     var image = FlxAtlasFrames.fromSparrow("assets/images/characters/player/adel.png", "assets/images/characters/player/adel.xml");
 
@@ -60,7 +69,7 @@ class Adel extends FlxSprite
         animation.addByPrefix("stand", "stand", false);
         animation.addByPrefix("walk", "walk", 8, true);
         animation.addByPrefix("jump", "jump", 8, false);
-        animation.addByPrefix("prepare", "prepare", 8, false);
+        animation.addByPrefix("prepare", "prepare", 8, false); // unused?
         animation.addByPrefix("sit", "sit", 8, false);
         animation.addByPrefix("angry", "angry", 8, false);
         animation.addByPrefix("blink", "blink", 8, false);
@@ -97,6 +106,11 @@ class Adel extends FlxSprite
         
         animate();
 
+        if (dashTimer > 0)
+        {
+            dashTimer -= elapsed;
+        }
+
         // Put this after everything
         super.update(elapsed);
     }
@@ -104,23 +118,30 @@ class Adel extends FlxSprite
     // Animate Adel
     function animate()
     {
-        // If Adel is on the floor and staying where she is, do stand animation
-        if (velocity.x == 0 && isTouching(FLOOR))
+        if (!dash)
         {
-            animation.play("stand");
-        }
+            // If Adel is on the floor and staying where she is, do stand animation
+            if (velocity.x == 0 && isTouching(FLOOR))
+            {
+                animation.play("stand");
+            }
         
-        // If Adel is on the floor and not staying where she is, do walk animation
-        if (velocity.x != 0 && isTouching(FLOOR))
-        {
-            animation.play("walk");
-        }
+            // If Adel is on the floor and not staying where she is, do walk animation
+            if (velocity.x != 0 && isTouching(FLOOR))
+            {
+                animation.play("walk");
+            }
 
-        // If Adel is not on the floor, do jump animation
-        // TODO: Is velocity.y != 0 needed?
-        if (velocity.y != 0 && !isTouching(FLOOR))
+            // If Adel is not on the floor, do jump animation
+            // TODO: Is velocity.y != 0 needed?
+            if (velocity.y != 0 && !isTouching(FLOOR))
+            {
+                animation.play("jump");
+            }
+        }
+        else
         {
-            animation.play("jump");
+            animation.play("dash");
         }
     }
 
@@ -130,14 +151,14 @@ class Adel extends FlxSprite
         acceleration.x = 0;
 
         // If player presses left keys, walk left
-        if (FlxG.keys.anyPressed([LEFT, A]))
+        if (FlxG.keys.anyPressed([LEFT, A]) && !dash)
         {
             flipX = true;
             direction = -1;
             acceleration.x -= adelAcceleration;
         }
         // If player presses right keys, walk right
-        else if (FlxG.keys.anyPressed([RIGHT, D]))
+        else if (FlxG.keys.anyPressed([RIGHT, D]) && !dash)
         {
             flipX = false;
             direction = 1;
@@ -145,7 +166,7 @@ class Adel extends FlxSprite
         }
 
         // If player pressing jump keys and is on ground, jump
-        if (FlxG.keys.anyJustPressed([SPACE, W, UP]) && isTouching(FLOOR))
+        if (FlxG.keys.anyJustPressed([SPACE, W, UP]) && isTouching(FLOOR) && !dash)
         {
             if (velocity.x == walkSpeed || velocity.x == -walkSpeed)
             {
@@ -163,6 +184,32 @@ class Adel extends FlxSprite
         if (velocity.y < 0 && FlxG.keys.anyJustReleased([SPACE, W, UP]))
         {
             velocity.y -= velocity.y * 0.5;
+        }
+
+        // adel dashes!
+        if (FlxG.keys.justPressed.SHIFT && !dash && dashTimer <= 0)
+        {
+            trace("dash"); // remove if it works
+            dash = true;
+            dashPosition = this.x;
+            dashDirection = direction;
+            dashTimer = dashCooldown;
+        }
+
+        if (dash)
+        {
+            var currentDistance = Math.abs(this.x - dashPosition);
+
+            if (currentDistance >= dashDistance || isTouching(WALL))
+            {
+                maxVelocity.x = walkSpeed;
+                dash = false;
+            }
+            else
+            {
+                maxVelocity.x = dashSpeed;
+                velocity.x = dashDirection * dashSpeed;
+            }
         }
     }
 
