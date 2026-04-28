@@ -11,7 +11,7 @@ This is inspired by Turrican II, Sonic 2's Scrapped Time Travel story and Super 
 1. Get Haxe 4.3.7
 2. Get HaxeFlixel (including Flixel-Addons)
 3. Get hxcpp (needed for windows builds)
-4. Get Visual Studio Community (install the c++ stuff, like the windows 11 sdk and the msvc stuff) (i know, this installs around 7 GB of stuff, but it's needed i think)
+4. Get Visual Studio Community (install the c++ stuff, like the windows 11 sdk and the msvc stuff) (i know, this installs around 7 GB of stuff, but it's needed i think) (Only needed for Windows, you can't even do this on Linux without using Wine because Visual Studio (not code) is Windows-only for some reason?)
 5. Get Polymod (including thx.core, thx.semver, jsonpath and jsonpatch)
 6. Use git version of thx.core (haxelib git thx.core https://github.com/fponticelli/thx.core)
 7. Compile using "lime test (platform) -debug" (You can use -release or whatever, but I recommend against that right now)
